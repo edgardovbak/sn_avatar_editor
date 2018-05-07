@@ -11,8 +11,12 @@ const DATA = require('../config.json');
 // save config 
 const atob = require('atob');
 
+export interface AvatarPath {
+	Path: string;
+}
+
 export interface Props {
-	userAvatar: string;
+	userAvatar: AvatarPath;
 	onUpdate: Function;
 }
 
@@ -46,7 +50,7 @@ class UserAvatar extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
 		this.state = {
-			image: !this.props.userAvatar ? DATA.domain + DATA.avatar + '/user.png' : DATA.domain + this.props.userAvatar,
+			image: !this.props.userAvatar ? DATA.domain + DATA.avatar + '/user.png' : DATA.domain + this.props.userAvatar.Path,
 			allowZoomOut: false,
 			position: { x: 0.5, y: 0.5 },
 			scale: 1,
@@ -109,7 +113,7 @@ class UserAvatar extends React.Component<Props, State> {
 
 	// set image to gefault 
 	useDefaultImage() {
-		this.setState({ image: !this.props.userAvatar ? DATA.domain + DATA.avatar + '/user.png' : DATA.domain + this.props.userAvatar, });
+		this.setState({ image: !this.props.userAvatar ? DATA.domain + DATA.avatar + '/user.png' : DATA.domain + this.props.userAvatar.Path });
 		// this.cropper.reset();
 	}
 
@@ -204,7 +208,8 @@ class UserAvatar extends React.Component<Props, State> {
 
 	render () {
 		// if user is not updated then show loader
-		if ( this.props.userAvatar !== null ) {
+		if ( !this.props.userAvatar ) {
+			console.log(this.state.image);
 			return (<Loader/>);
 		} else {
 			return (
