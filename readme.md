@@ -7,6 +7,8 @@ For this package is used [react-cropper](https://github.com/roadmanfong/react-cr
 
 A simple demo how to use this component you can find [here](https://github.com/edgardovbak/profil_module)
 
+![Preview](https://github.com/edgardovbak/sn_avatar_editor/blob/master/image/desctop.png)
+
 # !important
 
 To use this package you need to install 
