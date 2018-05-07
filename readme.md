@@ -13,33 +13,72 @@ To use this package you need to install
 
 - [atob](https://www.npmjs.com/package/atob) for encode image from base64
 - [react-cropper](https://github.com/roadmanfong/react-cropper) component is based on this package
-- [react-redux](https://github.com/reactjs/react-redux) 
+- [react-avatar-editor](https://github.com/mosch/react-avatar-editor) 
+- [react-dropzone](https://github.com/react-dropzone/react-dropzone)
 
 # How it works
 
 1. Get "userAvatar" from redux store
-2. init Cropper 
+2. init Editor 
 ```
-<Cropper
-		ref={(ref: any) => this.setEditorRef(ref)}
-		src={this.state.src}
-		preview=".user__avatar--preview"
-		aspectRatio={1 / 1}
-		guides={false}
-		crop={this._crop} 
-		className="user__avatar--editor"
-		rotatable={true}
-	/>
+<Dropzone
+	onDrop={this.handleDrop}
+	disableClick={true}
+	multiple={false}
+	style={{marginBottom: '35px' }}
+>	
+	<div>
+		<AvatarEditor
+			ref={(ref: any) => this.setEditorRef(ref)}
+			image={this.state.image}
+			width={this.state.width}
+			height={this.state.height}
+			borderRadius={this.state.borderRadius}
+			color={[0, 0, 0, 0.6]} // RGBA
+			rotate={this.state.rotate}
+			scale={this.state.scale}
+			onImageReady={this.imageReady}
+			onLoadSuccess={this.loadSuccess}
+			onDropFile={this.loadSuccess}
+			onImageChange={this.imageChange}
+		/>
+	</div>
+</Dropzone>
 ```
 3. Now we can upload picture or modify downloaded picture
-4. to save picture modifications press "Save Image" button
-5. this action run the "cropImage" function. In this function we create a rnadom image name (makeid function) and convert canvas to file (b64toBlob function)
-6. And send this file to other component
+4. to save picture modifications press "Save Avatar" button
+This action create file from editor that we can send it to SN.
+5. How send request for saving picture you can find [here](https://github.com/edgardovbak/profil_module/blob/GetUserInfo/User_avatar/src/components/EditProfil.tsx)
 
 # functions
 
-## useDefaultImage 
-Delete all changes
+## makeid 
+Generate a custom name for new images
+
+## b64toBlob 
+Convert base64 format to File
+
+## useDefaultImage
+Remove all modifications from avatar
+
+## handleRotate
+Detect rotating actions
+
+## handleDrop 
+Drag and dropp option for uploading images
+
+## handleScale
+Detect zoom actions
 
 ## setEditorRef 
-Add image editor to react references
+Add avatar editor to references
+
+## imageChange
+Detect all changes on image ( zoom, rotate ... )
+
+## handleNewImage 
+Detect new added image
+
+## handleSave 
+Save modifycations and send file with image to another component
+
