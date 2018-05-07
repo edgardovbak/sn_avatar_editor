@@ -12,9 +12,8 @@ A simple demo how to use this component you can find [here](https://github.com/e
 To use this package you need to install 
 
 - [atob](https://www.npmjs.com/package/atob) for encode image from base64
-- [react-cropper](https://github.com/roadmanfong/react-cropper) component is based on this package
-- [react-avatar-editor](https://github.com/mosch/react-avatar-editor) 
-- [react-dropzone](https://github.com/react-dropzone/react-dropzone)
+- [react-avatar-editor](https://github.com/mosch/react-avatar-editor) component is based on this package
+- [react-dropzone](https://github.com/react-dropzone/react-dropzone) drag and drop function for upload images
 
 # How it works
 
@@ -65,7 +64,7 @@ Remove all modifications from avatar
 Detect rotating actions
 
 ## handleDrop 
-Drag and dropp option for uploading images
+Drag and drop option for uploading images
 
 ## handleScale
 Detect zoom actions
@@ -80,5 +79,5 @@ Detect all changes on image ( zoom, rotate ... )
 Detect new added image
 
 ## handleSave 
-Save modifycations and send file with image to another component
+Save modifications and send file with image to another component
 
